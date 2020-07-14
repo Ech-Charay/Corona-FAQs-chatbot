@@ -3,3 +3,6 @@ SpeechRecognition
 gtts
 gunicorn
 numpy
+pandas
+librosa
+pytorch
