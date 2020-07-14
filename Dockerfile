@@ -7,6 +7,10 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
+# Download prebuilt model
+RUN mkdir -p /app/models
+RUN wget "https://download.pytorch.org/models/tutorials/4000_checkpoint.tar" -O /app/models/4000_checkpoint.tar
+
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 RUN pip install python-dotenv
@@ -19,5 +23,5 @@ ENV FLASK_ENV=development
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
-# Run app.py when the container launches
+# Run main.py when the container launches
 CMD ["python", "main.py"]

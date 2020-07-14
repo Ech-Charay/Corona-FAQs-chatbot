@@ -42,8 +42,8 @@ class BotServer:
         searcher = GreedySearchDecoder(encoder, decoder,decoder_n_layers)
 
         # Set upload folder and output records folder
-        self.UPLOAD_FOLDER = '/content/records/in'
-        self.REC_RES_FOLDER = '/content/records/out'
+        self.UPLOAD_FOLDER = './records/in'
+        self.REC_RES_FOLDER = './records/out'
 
         # Set allowed extensions
         self.ALLOWED_EXTENSIONS = {'wav'}
@@ -144,7 +144,7 @@ class BotServer:
           messages = [
                       {
                           "type": "Audio",
-                          "path": "http://b1ec39a3df14.ngrok.io/records/"+respfilename,
+                          "path": "https://coronafaqsbot.herokuapp.com/records/"+respfilename,
                           "isLocal": False,
                           "duration": duration,
                           "fromBot": True

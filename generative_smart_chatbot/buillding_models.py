@@ -30,7 +30,7 @@ checkpoint_iter = 4000
 #                             '{}_checkpoint.tar'.format(checkpoint_iter))
 
 # If you're loading the hosted model
-loadFilename = '/content/4000_checkpoint.tar'
+loadFilename = '../models/4000_checkpoint.tar'
 
 # Load model
 # Force CPU device options (to match tensors in this tutorial)

@@ -42,7 +42,7 @@ def dialog():
 
 @app.route('/records/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
-    return send_from_directory(directory='/content/records/out', filename=filename)
+    return send_from_directory(directory='./records/out', filename=filename)
 
 
 if __name__ == '__main__':
