@@ -8,8 +8,6 @@ WORKDIR /app
 COPY . /app
 
 # Install any needed packages specified in requirements.txt
-RUN wget "https://download.pytorch.org/models/tutorials/4000_checkpoint.tar"
-RUN apt install libasound2-dev portaudio19-dev libportaudio2 libportaudiocpp0 ffmpeg
 RUN pip install -r requirements.txt
 RUN pip install python-dotenv
 RUN python -m nltk.downloader wordnet
