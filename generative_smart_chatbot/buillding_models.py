@@ -34,7 +34,8 @@ loadFilename = '../models/4000_checkpoint.tar'
 
 # Load model
 # Force CPU device options (to match tensors in this tutorial)
-checkpoint = torch.load(loadFilename, map_location=torch.device('cpu'))
+device = torch.device('cpu')
+checkpoint = torch.load(loadFilename, map_location=device)
 encoder_sd = checkpoint['en']
 decoder_sd = checkpoint['de']
 encoder_optimizer_sd = checkpoint['en_opt']
