@@ -2,9 +2,9 @@ import os
 import torch
 import torch.nn as nn
 
-from vocabulary import Voc
-from encoder_rnn import EncoderRNN
-from attention_decoder import LuongAttnDecoderRNN
+from .vocabulary import Voc
+from .encoder_rnn import EncoderRNN
+from .attention_decoder import LuongAttnDecoderRNN
 
 def buildModels():
   save_dir = os.path.join("data", "save")
