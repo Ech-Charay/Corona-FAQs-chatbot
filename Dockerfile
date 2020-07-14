@@ -8,7 +8,8 @@ WORKDIR /app
 COPY . /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+RUN wget "https://download.pytorch.org/models/tutorials/4000_checkpoint.tar" 
+RUN pip install -r requirements.txt
 RUN pip install python-dotenv
 RUN python -m nltk.downloader wordnet
 
