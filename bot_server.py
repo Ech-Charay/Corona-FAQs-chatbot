@@ -7,7 +7,7 @@ from datetime import datetime
 import random 
 
 from cosine_similarity_based_retrieval_chatbot import Processing
-from generative_smart_chatbot import GreedySearchDecoder, normalizeString, evaluate
+from generative_smart_chatbot import GreedySearchDecoder, normalizeString, evaluate, buildModels
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
@@ -39,6 +39,7 @@ class BotServer:
         self.corpus_tfidf = self.tfidf_transformer.transform(self.corpus_bow)
 
         # Initialize search module
+        encoder, decoder, decoder_n_layers = buildModels()
         searcher = GreedySearchDecoder(encoder, decoder,decoder_n_layers)
 
         # Set upload folder and output records folder
