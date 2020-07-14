@@ -2,3 +2,4 @@ flask-ngrok
 SpeechRecognition
 gtts
 gunicorn
+numpy
