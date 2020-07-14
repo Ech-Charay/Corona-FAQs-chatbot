@@ -1,12 +1,14 @@
 import torch.nn as nn
 import torch
 
+SOS_token = 1  # Start-of-sentence token
+
 class GreedySearchDecoder(nn.Module):
     def __init__(self, encoder, decoder, decoder_n_layers):
         super(GreedySearchDecoder, self).__init__()
         self.encoder = encoder
         self.decoder = decoder
-        self._device = device
+        self._device = torch.device("cpu")
         self._SOS_token = SOS_token
         self._decoder_n_layers = decoder_n_layers
 
