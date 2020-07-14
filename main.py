@@ -49,6 +49,7 @@ if __name__ == '__main__':
     """
     Default Python entrypoint creates Botserver object and runs Flask app.
     """
+    print("*****************************************************************")
     bot = BotServer('./data/faq-text-preprocessed.csv')
 
     app.run(debug=True,host='0.0.0.0',port=port)
