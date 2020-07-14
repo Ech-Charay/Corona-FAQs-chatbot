@@ -1,6 +1,7 @@
 import os
 import torch
 import torch.nn as nn
+import wget
 
 from .vocabulary import Voc
 from .encoder_rnn import EncoderRNN
@@ -29,7 +30,9 @@ def buildModels():
   #                             '{}_checkpoint.tar'.format(checkpoint_iter))
 
   # If you're loading the hosted model
-  loadFilename = '../models/4000_checkpoint.tar'
+  #loadFilename = '../models/4000_checkpoint.tar'
+  url = 'https://download.pytorch.org/models/tutorials/4000_checkpoint.tar'
+  loadFilename = wget.download(url)
 
   # Load model
   # Force CPU device options (to match tensors in this tutorial)
