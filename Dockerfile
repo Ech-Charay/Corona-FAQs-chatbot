@@ -11,6 +11,7 @@ COPY . /app
 RUN pip install -r requirements.txt
 RUN pip install python-dotenv
 RUN python -m nltk.downloader wordnet
+RUN python -m spacy download en_core_web_sm
 
 # Set environmental variables
 ENV FLASK_APP=main.py
