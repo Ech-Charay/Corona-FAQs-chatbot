@@ -7,14 +7,11 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Download prebuilt model
-RUN mkdir -p /app/models
-RUN wget "https://download.pytorch.org/models/tutorials/4000_checkpoint.tar" -O /app/models/4000_checkpoint.tar
-
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 RUN pip install python-dotenv
 RUN python -m nltk.downloader wordnet
+RUN python -m wget -o "/app/models/4000_checkpoint.tar" "https://download.pytorch.org/models/tutorials/4000_checkpoint.tar"
 
 # Set environmental variables
 ENV FLASK_APP=main.py
