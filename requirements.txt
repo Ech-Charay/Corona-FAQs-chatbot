@@ -4,5 +4,5 @@ gtts
 gunicorn
 numpy
 pandas
-librosa
-numba
+librosa==0.7.2
+numba==0.45.0
