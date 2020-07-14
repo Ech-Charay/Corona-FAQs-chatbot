@@ -8,6 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Install any needed packages specified in requirements.txt
+RUN pip install PyAudio
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 RUN pip install python-dotenv
 RUN python -m nltk.downloader wordnet
