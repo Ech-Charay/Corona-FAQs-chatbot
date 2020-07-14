@@ -1,4 +1,4 @@
-from vocabulary import indexesFromSentence, normalizeString
+from .vocabulary import indexesFromSentence, normalizeString
 import torch
 
 from gtts import gTTS #Import Google Text to Speech
