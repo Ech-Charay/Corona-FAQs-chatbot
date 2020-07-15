@@ -50,4 +50,4 @@ Default Python entrypoint creates Botserver object and runs Flask app.
 """
 bot = BotServer('./data/faq-text-preprocessed.csv')
 
-app.run(host='0.0.0.0',port=port)
+app.run()
