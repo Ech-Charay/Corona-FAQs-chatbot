@@ -11,7 +11,6 @@ COPY . /app
 RUN pip install -r requirements.txt
 RUN pip install python-dotenv
 RUN python -m nltk.downloader wordnet
-RUN curl -s https://cli-assets.heroku.com/heroku-linux-x64.tar.gz | tar xz
 
 # Set environmental variables
 ENV FLASK_APP=main.py
