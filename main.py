@@ -49,5 +49,5 @@ def download(filename):
 Default Python entrypoint creates Botserver object and runs Flask app.
 """
 bot = BotServer('./data/faq-text-preprocessed.csv')
-
-app.run()
+if __name__ == '__main__':
+    app.run()
