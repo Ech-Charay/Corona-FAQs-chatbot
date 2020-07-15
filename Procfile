@@ -1,2 +1,2 @@
-release: mkdir -p records/in records/out models
+release: ./release-tasks.sh
 web: gunicorn main:app
