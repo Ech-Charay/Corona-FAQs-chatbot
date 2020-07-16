@@ -64,4 +64,4 @@ def buildModels():
   encoder.eval()
   decoder.eval()
   print('Models built and ready to go!')
-  return encoder, decoder, decoder_n_layers
+  return encoder, decoder, decoder_n_layers, voc
