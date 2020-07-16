@@ -11,6 +11,7 @@ import random
 import wave #zdtha
 import contextlib #zdtha
 import subprocess #zdtha
+from mutagen.mp3 import MP3 #zdtha
 
 from cosine_similarity_based_retrieval_chatbot import Processing
 from generative_smart_chatbot import GreedySearchDecoder, normalizeString, evaluate, buildModels
@@ -94,11 +95,13 @@ class BotServer:
 
     def get_duration(self, audio_name_only):
         fname = os.path.join(self.REC_RES_FOLDER, audio_name_only)
-        with contextlib.closing(wave.open(fname,'r')) as f:
-            frames = f.getnframes()
-            rate = f.getframerate()
-            duration = frames / float(rate)
-        return duration
+        audio = MP3(fname)
+        return audio.info.length
+        #with contextlib.closing(wave.open(fname,'r')) as f:
+            #frames = f.getnframes()
+            #rate = f.getframerate()
+            #duration = frames / float(rate)
+        #return duration
 
     def bot_dialog(self, request):
         """
