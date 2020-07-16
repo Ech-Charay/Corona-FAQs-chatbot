@@ -100,7 +100,6 @@ class BotServer:
             frames = f.getnframes()
             rate = f.getframerate()
             duration = frames / float(rate)
-        os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav"))     
         return duration
 
     def bot_dialog(self, request):
