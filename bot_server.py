@@ -143,7 +143,11 @@ class BotServer:
             list_records.append(respfilename)
           while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
             print("file isn't created yet")
-          duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
+            try:
+                duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
+            except AssertionError as error:
+                print(error)
+                
           # Return json file as webhook response 
           messages = [
                       {
