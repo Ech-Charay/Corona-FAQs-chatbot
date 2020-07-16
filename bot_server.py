@@ -141,7 +141,7 @@ class BotServer:
             engine = gTTS(''+erreur)
             engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
             list_records.append(respfilename)
-          duration = round(librosa.get_duration(filename=os.fspath(self.REC_RES_FOLDER + '/' + respfilename)))
+          duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
           # Return json file as webhook response 
           messages = [
                       {
