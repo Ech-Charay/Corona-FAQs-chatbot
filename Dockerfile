@@ -7,7 +7,6 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-RUN apt install libasound2-dev portaudio19-dev libportaudio2 libportaudiocpp0 ffmpeg
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 RUN pip install python-dotenv
