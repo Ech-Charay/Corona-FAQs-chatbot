@@ -1,9 +1,1 @@
-libasound2-dev
-python-dev
-python-numpy
-python-setuptools
-libsndfile-dev
-portaudio19-dev
-libportaudio2
-libportaudiocpp0
-ffmpeg
+
