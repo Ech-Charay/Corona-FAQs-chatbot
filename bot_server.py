@@ -131,7 +131,7 @@ class BotServer:
               # recognize (convert from speech to text)
               input_sentence = r.recognize_google(audio_data)
             #searcher = GreedySearchDecoder(encoder, decoder,decoder_n_layers)
-            response_text = self.match_query(self.searcher, self.voc, input_sentence)
+            response_text = self.match_query(self ,   input_sentence)
             for msg in response_text.split("\n\n"):
               now = datetime.now()
               respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".wav"
