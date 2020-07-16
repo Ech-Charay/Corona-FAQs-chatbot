@@ -154,10 +154,8 @@ class BotServer:
             list_records.append(respfilename)
           while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
             print("file isn't created yet")
-            try:
-               duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
-            except AssertionError as error:
-                 print(error)
+            duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
+
                 
 
             #os.rename(r''+os.path.join(self.REC_RES_FOLDER, respfilename),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
@@ -168,7 +166,7 @@ class BotServer:
                 #rate = f.getframerate()
                 #duration = frames / float(rate)
             #os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, respfilename))     
-          
+            
           #Return json file as webhook response 
           messages = [
                       {
