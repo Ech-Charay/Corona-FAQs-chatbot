@@ -11,7 +11,6 @@ import random
 import wave #zdtha
 import contextlib #zdtha
 import subprocess #zdtha
-from pydub import AudioSegment #zedtha
 
 from cosine_similarity_based_retrieval_chatbot import Processing
 from generative_smart_chatbot import GreedySearchDecoder, normalizeString, evaluate, buildModels
@@ -94,10 +93,7 @@ class BotServer:
       return '.' in filename and filename.rsplit('.', 1)[1].lower() in self.ALLOWED_EXTENSIONS
 
     def get_duration(self, audio_name_only):
-        os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav"),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
-        sound = AudioSegment.from_mp3(os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
-        fname = os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav")
-        sound.export(fname, format="wav")
+        fname = os.path.join(self.REC_RES_FOLDER, audio_name_only)
         with contextlib.closing(wave.open(fname,'r')) as f:
             frames = f.getnframes()
             rate = f.getframerate()
@@ -147,10 +143,10 @@ class BotServer:
             response_text = self.match_query(input_sentence)
             for msg in response_text.split("\n\n"):
               now = datetime.now()
-              respfilename = now.strftime("%d-%m-%Y-%H:%M:%S")
-              engine = gTTS('' + response_text)
-              engine.save(os.path.join(self.REC_RES_FOLDER, respfilename + ".wav"))
-              list_records.append(respfilename + ".wav")
+              respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".mp3"
+              engine = gTTS('' + response_text, lang='en')
+              engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
+              list_records.append(respfilename)
               durations.append(self.get_duration(respfilename))
  
               #durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
@@ -161,12 +157,12 @@ class BotServer:
                           "Sorry, get in mind  that you are talking only with a computer "])
             print(""+erreur)
             now = datetime.now()
-            respfilename = now.strftime("%d-%m-%Y-%H:%M:%S")
+            respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".mp3"
             #audio_name_only=now.strftime("%d-%m-%Y-%H:%M:%S")
             #respfilename = audio_name_only + ".wav" 
-            engine = gTTS(''+erreur)
-            engine.save(os.path.join(self.REC_RES_FOLDER, respfilename + ".wav"))
-            list_records.append(respfilename + ".wav")
+            engine = gTTS(''+erreur, lang='en')
+            engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
+            list_records.append(respfilename)
             durations.append(self.get_duration(respfilename))
             
 
