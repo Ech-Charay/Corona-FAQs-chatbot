@@ -19,11 +19,11 @@ def index():
                 "fromBot": True
             },
             {
-                "message": "How are you?",
+                "message": "i'm your loyal friend, your sucret cube",
                 "fromBot": True
             },
             {
-                "message": "You can ask me what ever you want about coronavirus.",
+                "message": "You can ask me what ever you want about covid_19 or enjoy with my discussion",
                 "fromBot": True
             }
         ]
