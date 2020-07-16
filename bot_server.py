@@ -102,6 +102,7 @@ class BotServer:
         
         # Handle webhook request
         #.get_json(force=True)
+        duration=1
         req = request.form
         msg_type = req.get('type')
         if msg_type == "Text":
@@ -151,22 +152,21 @@ class BotServer:
             list_records.append(respfilename)
           while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
             print("file isn't created yet")
-           # try:
-               # duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
-            #except AssertionError as error:
-                 #print(error)
+            try:
+               duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
+            except AssertionError as error:
+                 print(error)
                 
 
-            os.rename(r''+os.path.join(self.REC_RES_FOLDER, respfilename),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
-            subprocess.call(['ffmpeg', '-i', os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"), os.path.join(self.REC_RES_FOLDER, respfilename)])
-            fname = '/content/a1.wav'
-            duration=1
-            with contextlib.closing(wave.open(fname,'r')) as f:
-                frames = f.getnframes()
-                rate = f.getframerate()
-                duration = frames / float(rate)
+            #os.rename(r''+os.path.join(self.REC_RES_FOLDER, respfilename),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
+            #subprocess.call(['ffmpeg', '-i', os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"), os.path.join(self.REC_RES_FOLDER, respfilename)])
+            #fname = '/content/a1.wav'
+            #with contextlib.closing(wave.open(fname,'r')) as f:
+                #frames = f.getnframes()
+                #rate = f.getframerate()
+                #duration = frames / float(rate)
     
-            os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, respfilename))     
+            #os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, respfilename))     
           # Return json file as webhook response 
           messages = [
                       {
