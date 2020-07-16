@@ -142,8 +142,8 @@ class BotServer:
             
               with audioread.audio_open(os.path.join(self.REC_RES_FOLDER, respfilename)) as f:
                     totalsec = f.duration
-                    durations,sec = divmod(totalsec,60)
-                    
+                    min,sec = divmod(totalsec,60)
+              durations.append(min)
               #durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
           except AssertionError as error:
             print(error) 
@@ -160,7 +160,8 @@ class BotServer:
             list_records.append(respfilename)
             with audioread.audio_open(os.path.join(self.REC_RES_FOLDER, respfilename)) as f:
                 totalsec = f.duration
-                durations,sec = divmod(totalsec,60)
+                min,sec = divmod(totalsec,60)
+            durations.append(min)
 
             #durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
             
