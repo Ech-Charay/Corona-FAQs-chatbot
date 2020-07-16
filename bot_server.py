@@ -95,7 +95,7 @@ class BotServer:
     def get_duration(self, audio_name_only):
         os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav"),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
         subprocess.call(['ffmpeg', '-i', os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"), os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav")])
-        fname = '/app/records/out/' + audio_name_only + 'wav'
+        fname = os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav")
         with contextlib.closing(wave.open(fname,'r')) as f:
             frames = f.getnframes()
             rate = f.getframerate()
