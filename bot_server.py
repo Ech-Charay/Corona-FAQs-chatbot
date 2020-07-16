@@ -138,6 +138,7 @@ class BotServer:
               engine = gTTS('' + response_text)
               engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
               list_records.append(respfilename)
+              duration =librosa.get_duration(respfilename)
           except AssertionError as error:
             print(error) 
             erreur = random.choice(["Sorry, i did not understand you ,Please change the way you say it",
@@ -147,14 +148,15 @@ class BotServer:
             now = datetime.now()
             # respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".wav"
             audio_name_only=now.strftime("%d-%m-%Y-%H:%M:%S")
-            respfilename = audio_name_only + ".wav"
-            
+            respfilename = audio_name_only + ".wav" 
             engine = gTTS(''+erreur)
             engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
             list_records.append(respfilename)
-          while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
-            print("file isn't created yet")
-            duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
+            duration =librosa.get_duration(respfilename)
+            
+           while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
+                print("file isn't created yet")
+                duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
 
                 
 
