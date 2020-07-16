@@ -1,12 +1,9 @@
-from flask_ngrok import run_with_ngrok
 from flask import Flask, request, jsonify, json, send_from_directory
 import os
 
 from bot_server import BotServer
 
 app = Flask(__name__, static_url_path='')
-port = int(os.environ.get("PORT", 5000))
-run_with_ngrok(app)   #starts ngrok when the app is run
 
 @app.route('/')
 def index():
