@@ -154,9 +154,9 @@ class BotServer:
             list_records.append(respfilename)
             duration =librosa.get_duration(respfilename)
             
-           while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
-            print("file isn't created yet")
-            duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
+           #while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
+            #print("file isn't created yet")
+            #duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
 
                 
 
