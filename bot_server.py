@@ -123,6 +123,7 @@ class BotServer:
             filename = secure_filename(record.filename)
             record.save(os.path.join(self.UPLOAD_FOLDER, filename))
           list_records = []
+          durations = []
           try:
             r = spechrec.Recognizer()
             with spechrec.AudioFile(os.path.join(self.UPLOAD_FOLDER, filename)) as source:
@@ -138,7 +139,7 @@ class BotServer:
               engine = gTTS('' + response_text)
               engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
               list_records.append(respfilename)
-              duration =librosa.get_duration(respfilename)
+              durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
           except AssertionError as error:
             print(error) 
             erreur = random.choice(["Sorry, i did not understand you ,Please change the way you say it",
@@ -146,13 +147,13 @@ class BotServer:
                           "Sorry, get in mind  that you are talking only with a computer "])
             print(""+erreur)
             now = datetime.now()
-            # respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".wav"
-            audio_name_only=now.strftime("%d-%m-%Y-%H:%M:%S")
-            respfilename = audio_name_only + ".wav" 
+            respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".wav"
+            #audio_name_only=now.strftime("%d-%m-%Y-%H:%M:%S")
+            #respfilename = audio_name_only + ".wav" 
             engine = gTTS(''+erreur)
             engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
             list_records.append(respfilename)
-            duration =librosa.get_duration(respfilename)
+            durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
             
            #while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
             #print("file isn't created yet")
@@ -169,25 +170,15 @@ class BotServer:
                 #duration = frames / float(rate)
             #os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, respfilename))     
             
-            
-            
-            
-            #import audioread
-            #with audioread.audio_open('/content/a1.wav') as f:
-               # totalsec = f.duration
-               # min,sec = divmod(totalsec,60)
-    
-    
-            
           #Return json file as webhook response 
           messages = [
                       {
                           "type": "Audio",
-                          "path": "https://coronafaqsbot.herokuapp.com/records/"+respfilename,
+                          "path": "https://coronafaqsbot.herokuapp.com/records/"+list_records[i],
                           "isLocal": False,
-                          "duration": duration,
+                          "duration": durations[i],
                           "fromBot": True
                       }
-                      for filename in list_records
+                      for i in range(len(list_records))
                       ]
         return jsonify({"messages": messages})
