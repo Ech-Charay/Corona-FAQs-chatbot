@@ -1,6 +1,8 @@
 import os
 import numpy as np
 import pandas as pd
+import speech_recognition as spechrec
+from gtts import gTTS #Import Google Text to Speech
 
 import librosa
 from datetime import datetime
