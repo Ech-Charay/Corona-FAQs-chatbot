@@ -45,8 +45,8 @@ class BotServer:
         self.searcher = GreedySearchDecoder(encoder, decoder,decoder_n_layers)
 
         # Set upload folder and output records folder
-        self.UPLOAD_FOLDER = './records/in'
-        self.REC_RES_FOLDER = './records/out'
+        self.UPLOAD_FOLDER = '/app/records/in'
+        self.REC_RES_FOLDER = '/app/records/out'
 
         # Set allowed extensions
         self.ALLOWED_EXTENSIONS = {'wav'}
