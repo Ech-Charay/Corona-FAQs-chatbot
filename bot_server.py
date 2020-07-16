@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import pandas as pd
-import speech_recognition as spechrec
+import speech_recognition as spechrec 
 from gtts import gTTS #Import Google Text to Speech
 
 import librosa
@@ -137,7 +137,8 @@ class BotServer:
               engine = gTTS('' + response_text)
               engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
               list_records.append(respfilename)
-          except:
+          except AssertionError as error:
+            print(error) 
             erreur = random.choice(["Sorry, i did not understand you ,Please change the way you say it",
                           "please be a little simple in your discussion i m not a human",
                           "Sorry, get in mind  that you are talking only with a computer "])
@@ -165,9 +166,9 @@ class BotServer:
                 #frames = f.getnframes()
                 #rate = f.getframerate()
                 #duration = frames / float(rate)
-    
             #os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, respfilename))     
-          # Return json file as webhook response 
+          
+          #Return json file as webhook response 
           messages = [
                       {
                           "type": "Audio",
