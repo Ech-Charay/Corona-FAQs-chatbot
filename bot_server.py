@@ -92,6 +92,17 @@ class BotServer:
     def allowed_file(self, filename):
       return '.' in filename and filename.rsplit('.', 1)[1].lower() in self.ALLOWED_EXTENSIONS
 
+    def get_duration(self, audio_name_only):
+        os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav"),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
+        subprocess.call(['ffmpeg', '-i', os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"), os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav")])
+        fname = '/content/a1.wav'
+        with contextlib.closing(wave.open(fname,'r')) as f:
+            frames = f.getnframes()
+            rate = f.getframerate()
+            duration = frames / float(rate)
+        os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav"))     
+        return duration
+
     def bot_dialog(self, request):
         """
         Given the argument POST request, parse it according to json or form data,
@@ -135,11 +146,11 @@ class BotServer:
             response_text = self.match_query(input_sentence)
             for msg in response_text.split("\n\n"):
               now = datetime.now()
-              respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".wav"
+              respfilename = now.strftime("%d-%m-%Y-%H:%M:%S")
               engine = gTTS('' + response_text)
-              engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
-              list_records.append(respfilename)
-            
+              engine.save(os.path.join(self.REC_RES_FOLDER, respfilename + ".wav"))
+              list_records.append(respfilename + ".wav")
+              durations.append(self.get_duration(respfilename))
  
               #durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
           except AssertionError as error:
@@ -149,13 +160,13 @@ class BotServer:
                           "Sorry, get in mind  that you are talking only with a computer "])
             print(""+erreur)
             now = datetime.now()
-            respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".wav"
+            respfilename = now.strftime("%d-%m-%Y-%H:%M:%S")
             #audio_name_only=now.strftime("%d-%m-%Y-%H:%M:%S")
             #respfilename = audio_name_only + ".wav" 
             engine = gTTS(''+erreur)
-            engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
-            list_records.append(respfilename)
-
+            engine.save(os.path.join(self.REC_RES_FOLDER, respfilename + ".wav"))
+            list_records.append(respfilename + ".wav")
+            durations.append(self.get_duration(respfilename))
             
 
             #durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
@@ -166,15 +177,7 @@ class BotServer:
 
                 
 
-            os.rename(r''+os.path.join(self.REC_RES_FOLDER, respfilename),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
-            subprocess.call(['ffmpeg', '-i', os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"), os.path.join(self.REC_RES_FOLDER, respfilename)])
-            fname = '/content/a1.wav'
-            with contextlib.closing(wave.open(fname,'r')) as f:
-                frames = f.getnframes()
-                rate = f.getframerate()
-                duration = frames / float(rate)
-            os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, respfilename))     
-            durations.append(duration)
+            
           #Return json file as webhook response 
           messages = [
                       {
