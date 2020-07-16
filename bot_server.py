@@ -39,8 +39,8 @@ class BotServer:
         self.corpus_tfidf = self.tfidf_transformer.transform(self.corpus_bow)
 
         # Initialize search module
-        encoder, decoder, decoder_n_layers = buildModels()
-        searcher = GreedySearchDecoder(encoder, decoder,decoder_n_layers)
+        encoder, decoder, decoder_n_layers, self.voc = buildModels()
+        self.searcher = GreedySearchDecoder(encoder, decoder,decoder_n_layers)
 
         # Set upload folder and output records folder
         self.UPLOAD_FOLDER = './records/in'
@@ -77,7 +77,7 @@ class BotServer:
           print(similarity)
         else :
           query = normalizeString(query)
-          output_words = evaluate(searcher, voc, query)
+          output_words = evaluate(self.searcher, self.voc, query)
           output_words[:] = [x for x in output_words if not (x == 'EOS' or x == 'PAD')]
           response = ' '.join(output_words)
        
