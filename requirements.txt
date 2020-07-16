@@ -13,3 +13,5 @@ https://download.pytorch.org/whl/cpu/torchvision-0.4.2%2Bcpu-cp36-cp36m-linux_x8
 ipython
 spacy
 python3-wget
+pyaudio
+ffmpeg-python
