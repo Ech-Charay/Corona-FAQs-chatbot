@@ -10,3 +10,4 @@ spacy
 python3-wget
 mutagen
 sklearn
+ipython
