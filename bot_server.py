@@ -137,17 +137,32 @@ class BotServer:
                           "Sorry, get in mind  that you are talking only with a computer "])
             print(""+erreur)
             now = datetime.now()
-            respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".wav"
+            # respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".wav"
+            audio_name_only=now.strftime("%d-%m-%Y-%H:%M:%S")
+            respfilename = audio_name_only + ".wav"
+            
             engine = gTTS(''+erreur)
             engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
             list_records.append(respfilename)
           while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
             print("file isn't created yet")
-            try:
-                duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
-            except AssertionError as error:
-                print(error)
+           # try:
+               # duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
+            #except AssertionError as error:
+                 #print(error)
                 
+            import wave
+            import contextlib
+            import subprocess
+            os.rename(r''+os.path.join(self.REC_RES_FOLDER, respfilename),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
+            subprocess.call(['ffmpeg', '-i', os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"), os.path.join(self.REC_RES_FOLDER, respfilename)])
+            fname = '/content/a1.wav'
+            with contextlib.closing(wave.open(fname,'r')) as f:
+                frames = f.getnframes()
+                rate = f.getframerate()
+                duration = frames / float(rate)
+    
+            os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, respfilename))     
           # Return json file as webhook response 
           messages = [
                       {
