@@ -8,6 +8,11 @@ import librosa
 from datetime import datetime
 import random 
 
+
+import wave #zdtha
+import contextlib #zdtha
+import subprocess #zdtha
+
 from cosine_similarity_based_retrieval_chatbot import Processing
 from generative_smart_chatbot import GreedySearchDecoder, normalizeString, evaluate, buildModels
 
@@ -151,9 +156,7 @@ class BotServer:
             #except AssertionError as error:
                  #print(error)
                 
-            import wave
-            import contextlib
-            import subprocess
+
             os.rename(r''+os.path.join(self.REC_RES_FOLDER, respfilename),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
             subprocess.call(['ffmpeg', '-i', os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"), os.path.join(self.REC_RES_FOLDER, respfilename)])
             fname = '/content/a1.wav'
