@@ -118,6 +118,7 @@ class BotServer:
                       for msg in response_text.split("\n\n")
                       ]
         elif msg_type == "Audio":
+          respfilename=''
           record = request.files['record']
           if record and self.allowed_file(record.filename):
             filename = secure_filename(record.filename)
@@ -140,10 +141,7 @@ class BotServer:
               engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
               list_records.append(respfilename)
             
-              with audioread.audio_open(os.path.join(self.REC_RES_FOLDER, respfilename)) as f:
-                    totalsec = f.duration
-                    min,sec = divmod(totalsec,60)
-              durations.append(min)
+ 
               #durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
           except AssertionError as error:
             print(error) 
@@ -158,28 +156,26 @@ class BotServer:
             engine = gTTS(''+erreur)
             engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
             list_records.append(respfilename)
-            with audioread.audio_open(os.path.join(self.REC_RES_FOLDER, respfilename)) as f:
-                totalsec = f.duration
-                min,sec = divmod(totalsec,60)
-            durations.append(min)
+
+            
 
             #durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
             
-           #while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
+            #while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
             #print("file isn't created yet")
             #duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
 
                 
 
-            #os.rename(r''+os.path.join(self.REC_RES_FOLDER, respfilename),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
-            #subprocess.call(['ffmpeg', '-i', os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"), os.path.join(self.REC_RES_FOLDER, respfilename)])
-            #fname = '/content/a1.wav'
-            #with contextlib.closing(wave.open(fname,'r')) as f:
-                #frames = f.getnframes()
-                #rate = f.getframerate()
-                #duration = frames / float(rate)
-            #os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, respfilename))     
-            
+            os.rename(r''+os.path.join(self.REC_RES_FOLDER, respfilename),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
+            subprocess.call(['ffmpeg', '-i', os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"), os.path.join(self.REC_RES_FOLDER, respfilename)])
+            fname = '/content/a1.wav'
+            with contextlib.closing(wave.open(fname,'r')) as f:
+                frames = f.getnframes()
+                rate = f.getframerate()
+                duration = frames / float(rate)
+            os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, respfilename))     
+            durations.append(duration)
           #Return json file as webhook response 
           messages = [
                       {
