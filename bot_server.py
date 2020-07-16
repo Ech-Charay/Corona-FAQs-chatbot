@@ -141,7 +141,7 @@ class BotServer:
             engine = gTTS(''+erreur)
             engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
             list_records.append(respfilename)
-          while os.path.isfile('./path_of_file') == False:
+          while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
             print("file isn't created yet")
           duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
           # Return json file as webhook response 
