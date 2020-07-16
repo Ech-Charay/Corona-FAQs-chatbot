@@ -93,7 +93,6 @@ class BotServer:
         within the FAQ.
         """
         
-        print('****************')
         # Handle webhook request
         #.get_json(force=True)
         req = request.form
