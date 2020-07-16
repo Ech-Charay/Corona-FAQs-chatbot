@@ -4,14 +4,9 @@ import pandas as pd
 import speech_recognition as spechrec 
 from gtts import gTTS #Import Google Text to Speech
 
-import librosa
 from datetime import datetime
 import random 
-
-import wave #zdtha
-import contextlib #zdtha
-import subprocess #zdtha
-from mutagen.mp3 import MP3 #zdtha
+from mutagen.mp3 import MP3
 
 from cosine_similarity_based_retrieval_chatbot import Processing
 from generative_smart_chatbot import GreedySearchDecoder, normalizeString, evaluate, buildModels
@@ -96,25 +91,19 @@ class BotServer:
     def get_duration(self, audio_name_only):
         fname = os.path.join(self.REC_RES_FOLDER, audio_name_only)
         audio = MP3(fname)
-        return audio.info.length
-        #with contextlib.closing(wave.open(fname,'r')) as f:
-            #frames = f.getnframes()
-            #rate = f.getframerate()
-            #duration = frames / float(rate)
-        #return duration
+        return round(audio.info.length)
 
     def bot_dialog(self, request):
         """
-        Given the argument POST request, parse it according to json or form data,
-        and return a json response or html template based on sklearn matching
+        Given the argument POST request, parse it according to form data,
+        and return a json response based on sklearn matching
         within the FAQ.
         """
         
         # Handle webhook request
-        #.get_json(force=True)
-        duration=1
         req = request.form
         msg_type = req.get('type')
+        
         if msg_type == "Text":
           message = req.get('message')
           response_text = self.match_query(message)
@@ -127,14 +116,17 @@ class BotServer:
                       }
                       for msg in response_text.split("\n\n")
                       ]
+            
         elif msg_type == "Audio":
           respfilename=''
           record = request.files['record']
           if record and self.allowed_file(record.filename):
             filename = secure_filename(record.filename)
             record.save(os.path.join(self.UPLOAD_FOLDER, filename))
+            
           list_records = []
           durations = []
+            
           try:
             r = spechrec.Recognizer()
             with spechrec.AudioFile(os.path.join(self.UPLOAD_FOLDER, filename)) as source:
@@ -151,8 +143,7 @@ class BotServer:
               engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
               list_records.append(respfilename)
               durations.append(self.get_duration(respfilename))
- 
-              #durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
+                
           except AssertionError as error:
             print(error) 
             erreur = random.choice(["Sorry, i did not understand you ,Please change the way you say it",
@@ -167,16 +158,6 @@ class BotServer:
             engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
             list_records.append(respfilename)
             durations.append(self.get_duration(respfilename))
-            
-
-            #durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
-            
-            #while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
-            #print("file isn't created yet")
-            #duration = round(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
-
-                
-
             
           #Return json file as webhook response 
           messages = [
