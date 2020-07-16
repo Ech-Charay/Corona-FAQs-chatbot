@@ -13,3 +13,4 @@ ipython
 spacy
 python3-wget
 ffmpeg-python
+xlrd
