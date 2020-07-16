@@ -11,6 +11,7 @@ import random
 import wave #zdtha
 import contextlib #zdtha
 import subprocess #zdtha
+from pydub import AudioSegment #zedtha
 
 from cosine_similarity_based_retrieval_chatbot import Processing
 from generative_smart_chatbot import GreedySearchDecoder, normalizeString, evaluate, buildModels
@@ -94,8 +95,9 @@ class BotServer:
 
     def get_duration(self, audio_name_only):
         os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav"),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
-        subprocess.call(['ffmpeg', '-i', os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"), os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav")])
+        sound = AudioSegment.from_mp3(os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
         fname = os.path.join(self.REC_RES_FOLDER, audio_name_only + ".wav")
+        sound.export(fname, format="wav")
         with contextlib.closing(wave.open(fname,'r')) as f:
             frames = f.getnframes()
             rate = f.getframerate()
