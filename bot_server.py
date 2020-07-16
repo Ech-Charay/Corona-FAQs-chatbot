@@ -8,7 +8,7 @@ import librosa
 from datetime import datetime
 import random 
 
-
+import audioread #zdtha
 #import wave #zdtha
 #import contextlib #zdtha
 #import subprocess #zdtha
@@ -139,7 +139,12 @@ class BotServer:
               engine = gTTS('' + response_text)
               engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
               list_records.append(respfilename)
-              durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
+            
+              with audioread.audio_open(os.path.join(self.REC_RES_FOLDER, respfilename)) as f:
+                    totalsec = f.duration
+                    durations,sec = divmod(totalsec,60)
+                    
+              #durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
           except AssertionError as error:
             print(error) 
             erreur = random.choice(["Sorry, i did not understand you ,Please change the way you say it",
@@ -153,7 +158,11 @@ class BotServer:
             engine = gTTS(''+erreur)
             engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
             list_records.append(respfilename)
-            durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
+            with audioread.audio_open(os.path.join(self.REC_RES_FOLDER, respfilename)) as f:
+                totalsec = f.duration
+                durations,sec = divmod(totalsec,60)
+
+            #durations.append(librosa.get_duration(filename= self.REC_RES_FOLDER + '/' + respfilename))
             
            #while os.path.isfile(self.REC_RES_FOLDER +'/'+ respfilename) == False:
             #print("file isn't created yet")
