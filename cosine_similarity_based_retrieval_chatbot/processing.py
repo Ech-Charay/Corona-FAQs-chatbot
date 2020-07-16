@@ -1,10 +1,12 @@
 import string
 from sklearn.feature_extraction import stop_words
 from nltk.stem import WordNetLemmatizer
+import nltk
 
 class Processing:
   def __init__(self):
     print("init processing")
+    nltk.download('wordnet')
 
   def lem(self, words):
       """Returns list of lemmas from argument list of words."""
