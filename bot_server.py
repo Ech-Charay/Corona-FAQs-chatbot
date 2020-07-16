@@ -169,6 +169,16 @@ class BotServer:
                 #duration = frames / float(rate)
             #os.rename(r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"),r''+os.path.join(self.REC_RES_FOLDER, respfilename))     
             
+            
+            
+            
+            #import audioread
+            #with audioread.audio_open('/content/a1.wav') as f:
+               # totalsec = f.duration
+               # min,sec = divmod(totalsec,60)
+    
+    
+            
           #Return json file as webhook response 
           messages = [
                       {
