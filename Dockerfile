@@ -9,7 +9,6 @@ COPY . /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
-RUN pip install python-dotenv
 RUN python -m nltk.downloader wordnet
 
 # Set environmental variables
