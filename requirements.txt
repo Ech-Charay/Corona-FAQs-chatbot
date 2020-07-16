@@ -9,3 +9,4 @@ https://download.pytorch.org/whl/cpu/torch-1.3.1%2Bcpu-cp36-cp36m-linux_x86_64.w
 spacy
 python3-wget
 mutagen
+sklearn
