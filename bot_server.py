@@ -160,6 +160,7 @@ class BotServer:
             os.rename(r''+os.path.join(self.REC_RES_FOLDER, respfilename),r''+os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"))
             subprocess.call(['ffmpeg', '-i', os.path.join(self.REC_RES_FOLDER, audio_name_only+".mp3"), os.path.join(self.REC_RES_FOLDER, respfilename)])
             fname = '/content/a1.wav'
+            duration=1
             with contextlib.closing(wave.open(fname,'r')) as f:
                 frames = f.getnframes()
                 rate = f.getframerate()
