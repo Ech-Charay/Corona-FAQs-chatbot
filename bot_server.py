@@ -143,18 +143,6 @@ class BotServer:
               engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
               list_records.append(respfilename)
               durations.append(self.get_duration(respfilename))
-          
-          except spechrec.UnknownValueError:
-            error = "I didn't understand you correctly, you may have written a word wrong. Please correct your language!"
-            print(""+erreur)
-            now = datetime.now()
-            respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".mp3"
-            #audio_name_only=now.strftime("%d-%m-%Y-%H:%M:%S")
-            #respfilename = audio_name_only + ".wav" 
-            engine = gTTS(''+erreur, lang='en')
-            engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
-            list_records.append(respfilename)
-            durations.append(self.get_duration(respfilename))
         
           except AssertionError as error:
             print(error) 
@@ -164,6 +152,18 @@ class BotServer:
             print(""+erreur)
             now = datetime.now()
             respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".mp3"
+            engine = gTTS(''+erreur, lang='en')
+            engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
+            list_records.append(respfilename)
+            durations.append(self.get_duration(respfilename))
+          
+          except:
+            error = "I didn't understand you correctly, you may have said a word wrong. Please correct your language!"
+            print(""+erreur)
+            now = datetime.now()
+            respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".mp3"
+            #audio_name_only=now.strftime("%d-%m-%Y-%H:%M:%S")
+            #respfilename = audio_name_only + ".wav" 
             engine = gTTS(''+erreur, lang='en')
             engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
             list_records.append(respfilename)
