@@ -109,18 +109,18 @@ class BotServer:
         if msg_type == "Text":
           message = req.get('message')
           try:
-                response_text = self.match_query(message)
+              response_text = self.match_query(message)
+              # Return json file as webhook response 
+              messages = [
+                          {
+                              "type": "Text",
+                              "message": msg,
+                              "fromBot": True
+                          }
+                          for msg in response_text.split("\n\n")
+                          ]
           except:
             raise Exception("Erreur:evaluate")
-          # Return json file as webhook response 
-          messages = [
-                      {
-                          "type": "Text",
-                          "message": msg,
-                          "fromBot": True
-                      }
-                      for msg in response_text.split("\n\n")
-                      ]
             
         elif msg_type == "Audio":
           respfilename=''
