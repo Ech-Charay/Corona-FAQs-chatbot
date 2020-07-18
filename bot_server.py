@@ -78,11 +78,13 @@ class BotServer:
           response = self.faq.answer.iloc[index]
           print(similarity)
         else :
-          query = normalizeString(query)
-          output_words = evaluate(self.searcher, self.voc, query)
-          output_words[:] = [x for x in output_words if not (x == 'EOS' or x == 'PAD')]
-          response = ' '.join(output_words)
-       
+            query = normalizeString(query)
+            try:
+                output_words = evaluate(self.searcher, self.voc, query)
+                output_words[:] = [x for x in output_words if not (x == 'EOS' or x == 'PAD')]
+                response = ' '.join(output_words)
+            Except :
+                raise Exception("Erreur:match_query")
         return response
 
     def allowed_file(self, filename):
