@@ -108,7 +108,10 @@ class BotServer:
         
         if msg_type == "Text":
           message = req.get('message')
-          response_text = self.match_query(message)
+          try:
+                response_text = self.match_query(message)
+          except:
+            raise Exception("Erreur:evaluate")
           # Return json file as webhook response 
           messages = [
                       {
