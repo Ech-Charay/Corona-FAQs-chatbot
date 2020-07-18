@@ -144,7 +144,7 @@ class BotServer:
               list_records.append(respfilename)
               durations.append(self.get_duration(respfilename))
           
-          except UnknownValueError:
+          except spechrec.UnknownValueError:
             error = "I didn't understand you correctly, you may have written a word wrong. Please correct your language!"
             print(""+erreur)
             now = datetime.now()
