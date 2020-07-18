@@ -79,12 +79,9 @@ class BotServer:
           print(similarity)
         else :
             query = normalizeString(query)
-            try:
-                output_words = evaluate(self.searcher, self.voc, query)
-                output_words[:] = [x for x in output_words if not (x == 'EOS' or x == 'PAD')]
-                response = ' '.join(output_words)
-            except :
-                raise Exception("Erreur:match_query")
+            output_words = evaluate(self.searcher, self.voc, query)
+            output_words[:] = [x for x in output_words if not (x == 'EOS' or x == 'PAD')]
+            response = ' '.join(output_words)
         return response
 
     def allowed_file(self, filename):
@@ -108,19 +105,16 @@ class BotServer:
         
         if msg_type == "Text":
           message = req.get('message')
-          try:
-              response_text = self.match_query(message)
-              # Return json file as webhook response 
-              messages = [
-                          {
-                              "type": "Text",
-                              "message": msg,
-                              "fromBot": True
-                          }
-                          for msg in response_text.split("\n\n")
-                          ]
-          except:
-            raise Exception("Erreur:evaluate")
+          response_text = self.match_query(message)
+          # Return json file as webhook response 
+          messages = [
+                      {
+                          "type": "Text",
+                          "message": msg,
+                          "fromBot": True
+                      }
+                      for msg in response_text.split("\n\n")
+                      ]
             
         elif msg_type == "Audio":
           respfilename=''
