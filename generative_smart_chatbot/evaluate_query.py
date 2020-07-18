@@ -27,7 +27,7 @@ def evaluate(searcher, voc, sentence, max_length=MAX_LENGTH):
         return decoded_words
     except KeyError:
         print("Error: Encountered unknown word.")
-        return "I didn't understand you correctly, you may have written a word wrong. Please correct your language!"
+        return ["I", "didn't", "understand","you", "correctly,", "you", "may", "have", "written", "a", "word", "wrong.", "Please", "correct", "your", "language!"]
 
 # Evaluate inputs from user input (stdin)
 def evaluateInput(searcher, voc,input_sentence):
@@ -50,7 +50,7 @@ def evaluateInput(searcher, voc,input_sentence):
             print('Bot:', ' '.join(output_words))
         except KeyError:
             print("Error: Encountered unknown word.")
-            return "I didn't understand you correctly, you may have written a word wrong. Please correct your language!"
+            return ["I", "didn't", "understand","you", "correctly,", "you", "may", "have", "written", "a", "word", "wrong.", "Please", "correct", "your", "language!"]
 
 
 
@@ -73,7 +73,7 @@ def evaluateInput2(searcher, voc):
     engine.save('a1.wav') 
   except KeyError:
     print("Error: Encountered unknown word.")
-    return "I didn't understand you correctly, you may have written a word wrong. Please correct your language!"
+    return ["I", "didn't", "understand","you", "correctly,", "you", "may", "have", "written", "a", "word", "wrong.", "Please", "correct", "your", "language!"]
 
 
 
@@ -92,4 +92,4 @@ def evaluateExample(sentence, searcher, voc):
         print('Bot:', ' '.join(output_words))
     except KeyError:
         print("Error: Encountered unknown word.")
-        return "I didn't understand you correctly, you may have written a word wrong. Please correct your language!"
+        return ["I", "didn't", "understand","you", "correctly,", "you", "may", "have", "written", "a", "word", "wrong.", "Please", "correct", "your", "language!"]
