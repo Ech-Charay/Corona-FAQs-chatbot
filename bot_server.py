@@ -144,28 +144,18 @@ class BotServer:
               list_records.append(respfilename)
               durations.append(self.get_duration(respfilename))
         
-          except AssertionError as error:
-            print(error) 
-            erreur = random.choice(["Sorry, i did not understand you ,Please change the way you say it",
+          except:
+                erreur = random.choice(["Sorry, i did not understand you ,Please change the way you say it",
                           "please be a little simple in your discussion i m not a human",
                           "Sorry, get in mind  that you are talking only with a computer "])
-            print(""+erreur)
-            now = datetime.now()
-            respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".mp3"
-            engine = gTTS(''+erreur, lang='en')
-            engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
-            list_records.append(respfilename)
-            durations.append(self.get_duration(respfilename))
-          
-          except:
-            erreur = "I didn't understand you correctly, you may have said a word wrong. Please correct your language!"
-            print(""+erreur)
-            now = datetime.now()
-            respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".mp3"
-            engine = gTTS(''+erreur, lang='en')
-            engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
-            list_records.append(respfilename)
-            durations.append(self.get_duration(respfilename))
+                print(""+erreur)
+                now = datetime.now()
+                respfilename = now.strftime("%d-%m-%Y-%H:%M:%S") + ".mp3"
+                engine = gTTS(''+erreur, lang='en')
+                engine.save(os.path.join(self.REC_RES_FOLDER, respfilename))
+                list_records.append(respfilename)
+                durations.append(self.get_duration(respfilename))
+
             
           #Return json file as webhook response 
           messages = [
