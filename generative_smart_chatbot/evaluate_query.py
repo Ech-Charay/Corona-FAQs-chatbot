@@ -20,7 +20,10 @@ def evaluate(searcher, voc, sentence, max_length=MAX_LENGTH):
         return decoded_words
     except KeyError:
         print("Error: Encountered unknown word.")
-        raise Exception("Erreur:evaluate")
+        erreur = random.choice(["Sorry, i did not understand you ,Please change the way you say it",
+                          "please be a little simple in your discussion i m not a human",
+                          "Sorry, get in mind  that you are talking only with a computer "])
+        return erreur.split()
 
 # Evaluate inputs from user input (stdin)
 def evaluateInput(searcher, voc,input_sentence):
@@ -37,6 +40,9 @@ def evaluateInput(searcher, voc,input_sentence):
             print('Bot:', ' '.join(output_words))
         except KeyError:
             print("Error: Encountered unknown word.")
-            raise Exception("Erreur:evaluateInput")
+            erreur = random.choice(["Sorry, i did not understand you ,Please change the way you say it",
+                          "please be a little simple in your discussion i m not a human",
+                          "Sorry, get in mind  that you are talking only with a computer "])
+            return erreur.split()
 
 
