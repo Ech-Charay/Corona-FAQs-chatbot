@@ -71,4 +71,4 @@ if __name__ == '__main__':
     #faq.answer = faq.answer.apply(preprocess)
     #faq.answer = faq.answer.apply(sentence_tokenize)
     faq.answer = faq.answer.apply(paragraph_tokenize)
-    faq.to_csv('/content/drive/My Drive/MyFirstChatBot/data/faq-text-preprocessed.csv', index=False)
+    faq.to_csv('/app/data/faq-text-preprocessed.csv', index=False)
