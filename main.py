@@ -19,11 +19,11 @@ def index():
                 "fromBot": True
             },
             {
-                "message": "i'm your loyal friend, your sucret cube",
+                "message": "i'm your loyal friend, your secret cube",
                 "fromBot": True
             },
             {
-                "message": "You can ask me what ever you want about covid_19 or enjoy with my discussion",
+                "message": "You can ask me whatever you want about covid_19 as you can enjoy with my discussion",
                 "fromBot": True
             }
         ]
